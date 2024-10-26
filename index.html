@@ -3,30 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Happy Diwali!</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Autoplay Video with Audio</title>
 </head>
 <body>
-    <div class="container">
-        <h1 class="greeting">✨ Happy Diwali! ✨</h1>
-        <p>"Wishing you and your family a Happy Diwali, the festival of lights!"</p>
-
-        <!-- Diwali Themed Video -->
-        <video width="640" height="360" controls>
-            <source src="Video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-
-        <button onclick="startFireworks()">Start Fireworks</button>
-
-        <!-- Fireworks Animation -->
-        <div id="fireworks"></div>
-    </div>
+    <video id="myVideo" width="600" autoplay muted loop>
+        <source src="your-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
     
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <audio id="myAudio" loop>
+        <source src="your-audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
 
+    <script>
+        // Get video and audio elements
+        const video = document.getElementById('myVideo');
+        const audio = document.getElementById('myAudio');
+
+        // Play video and audio when the video starts
+        video.addEventListener('play', function() {
+            audio.play(); // Play audio when the video starts
+        });
+
+        // Optionally, you can pause audio when video is paused
+        video.addEventListener('pause', function() {
+            audio.pause();
+        });
+
+        // You can also sync audio with video ending
+        video.addEventListener('ended', function() {
+            audio.pause();
+            audio.currentTime = 0; // Reset audio
+        });
+
+        // Start playing both video and audio
+        video.play();
+        audio.play();
+    </script>
 </body>
 </html>
